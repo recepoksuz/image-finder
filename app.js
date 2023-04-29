@@ -9,7 +9,6 @@ removeButton.addEventListener("click", removeFunc)
 
 function search(){
     value = searchArea.value.trim()
-    console.log(value)
     fetch(`https://api.unsplash.com/search/photos?query=${value}`,{
     method: "GET",
     headers : {
@@ -17,13 +16,10 @@ function search(){
     }})
     .then((res) => res.json())
     .then((data)=>{
-        if(imagesArea.firstChild != null){
-            removeFunc()
-        }
+        removeFunc();
         (data.results).forEach(item => {
             url = item.urls.small
             createImage(url)
-            console.log(url)
         });
     })
     .catch((err)=>console.log(err))
